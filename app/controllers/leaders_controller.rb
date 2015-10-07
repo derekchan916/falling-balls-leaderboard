@@ -5,11 +5,10 @@ class LeadersController < ActionController::Base
 
     if user && (user.score < leader.score)
       user.update!(score: leader.score)
-      @leaders = Leader.all.order(score: :desc).limit(8)
     elsif !user
       leader.save
-      @leaders = Leader.all.order(score: :desc).limit(8)
     end
+    @leaders = Leader.all.order(score: :desc).limit(8)
 
     render json: @leaders
   end
