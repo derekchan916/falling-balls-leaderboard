@@ -3,7 +3,7 @@ class LeadersController < ActionController::Base
     leader = Leader.new(leader_params)
     user = Leader.find_by(name: leader.name)
 
-    if user.name && (user.score < leader.score)
+    if user && (user.score < leader.score)
       user.update!(score: leader.score)
       @leaders = Leader.all.order(score: :desc).limit(6)
     else
