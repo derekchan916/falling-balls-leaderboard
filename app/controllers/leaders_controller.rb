@@ -15,7 +15,7 @@ class LeadersController < ActionController::Base
   end
 
   def index
-    @leaders = Leader.all.order(score: :desc).limit(6)
+    @leaders = Leader.all.order(score: :desc).limit(8)
 
     render json: @leaders
   end
