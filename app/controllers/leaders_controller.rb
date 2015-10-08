@@ -19,6 +19,12 @@ class LeadersController < ActionController::Base
     render json: @leaders
   end
 
+  def all
+    @leaders = Leader.all.order(score: :desc)
+
+    render json: @leaders
+  end
+
   private
 
   def leader_params
