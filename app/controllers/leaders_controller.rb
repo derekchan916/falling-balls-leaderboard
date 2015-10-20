@@ -3,14 +3,16 @@ class LeadersController < ActionController::Base
     leader = Leader.new(leader_params)
     user = Leader.find_by(name: leader.name)
 
-    if user && (user.score < leader.score)
-      user.update!(score: leader.score)
-    elsif !user
-      leader.save
-    end
-    @leaders = Leader.all.order(score: :desc).limit(8)
+    if leader.score < 10000
+      if user && (user.score < leader.score)
+        user.update!(score: leader.score)
+      elsif !user
+        leader.save
+      end
+      @leaders = Leader.all.order(score: :desc).limit(8)
 
-    render json: @leaders
+      render json: @leaders
+    end
   end
 
   def index
